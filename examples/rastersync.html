@@ -14,12 +14,12 @@
       #map2d, #map3d{position: absolute; left: 0; top: 0; bottom: 0; right: 0;}
       #map2d{right: 50%;} #map3d{left: 50%;}
       #infoDiv, #controls, #logo, #fork, #title{position: absolute; padding: 10px; z-index: 50; opacity: 0.9; background-color: #fff;}
-      #infoDiv{right: 10px; bottom: 10px;}
+      #infoDiv{right: 10px; bottom: 10px; padding-bottom: 0;}
       #controls{right: 10px; top: 160px; text-align: right; background-color: transparent;}
       #logo {left: 10px; bottom: 10px; padding: 10px 10px 5px 10px;}
       #fork {top: 0; right: 0; border: 0; padding: 0;}
       #title{top: 10px;left: 10px; padding: 0;}
-      #title img{width: 300px;}
+      #title img{width: 300px; padding-top: 5px;}
       .ol-zoom{top: 100px;}
       fieldset{border: 0;}
     </style>
@@ -53,7 +53,7 @@
       </fieldset>
       <fieldset id="layer2">
         <label class="checkbox" for="visible10">
-          <input id="visible1" class="visible" type="checkbox" onchange="layer2.setVisible(this.checked)" checked/>World borders
+          <input id="visible1" class="visible" type="checkbox" onchange="layer2.setVisible(this.checked)" />World borders
         </label>
         <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer2.setOpacity(this.value)"/>
     </fieldset>

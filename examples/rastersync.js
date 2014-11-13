@@ -19,6 +19,7 @@ var layer2 = new ol.layer.Tile({
     crossOrigin: 'anonymous'
   })
 });
+layer2.setVisible(false);
 var ol2d = new ol.Map({
   layers: [layer0, new ol.layer.Group({layers: [layer1, layer2]})],
   target: 'map2d',

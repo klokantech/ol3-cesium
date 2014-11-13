@@ -14,7 +14,7 @@ var ol2d = new ol.Map({
 var ol3d = new olcs.OLCesium(ol2d);
 var scene = ol3d.getCesiumScene();
 var terrainProvider = new Cesium.CesiumTerrainProvider({
-    url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
+  url: '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
 });
 scene.terrainProvider = terrainProvider;
 
@@ -23,11 +23,13 @@ var camera = ol3d.getCamera();
 
 var infoDiv = document.getElementById('infoDiv');
 var printInfo = function() {
-  infoDiv.innerHTML = 'Center: ' + camera.getCenter() + '<br />' +
-                      'Distance: ' + camera.getDistance() + '<br />' +
-                      'Heading: ' + camera.getHeading() + '<br />' +
-                      'Tilt: ' + camera.getTilt() + '<br />' +
-                      '<i>Position:</i> ' + camera.getPosition() + '<br />' +
-                      '<i>Altitude:</i> ' + camera.getAltitude() + '<br />';
+  infoDiv.innerHTML = 'Center: ' + Math.ceil(camera.getCenter()[0]) 
+          + ', ' + Math.ceil(camera.getCenter()[1]) + '<br />' +
+          'Distance: ' + Math.ceil(camera.getDistance()) + '<br />' +
+          'Heading: ' + camera.getHeading() + '<br />' +
+          'Tilt: ' + camera.getTilt() + '<br />' +
+          '<i>Position:</i> ' + Math.ceil(camera.getPosition()[0]) 
+          + ', ' + Math.ceil(camera.getPosition()[1]) + '<br />' +
+          '<i>Altitude:</i> ' + Math.ceil(camera.getAltitude()) + '<br />';
 };
 setInterval(printInfo, 100);
