@@ -1,6 +1,6 @@
 var view = new ol.View({
   center: ol.proj.transform([-112.2, 36.06], 'EPSG:4326', 'EPSG:3857'),
-  zoom: 11
+  zoom: 12
 });
 
 var layer0 = new ol.layer.Tile({
@@ -33,6 +33,9 @@ var terrainProvider = new Cesium.CesiumTerrainProvider({
     url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
 });
 scene.terrainProvider = terrainProvider;
+
+var camera = ol3d.getCamera();
+camera.setTilt(Math.PI / 6);
 
 ol3d.setEnabled(true);
 

@@ -1,68 +1,95 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="robots" content="index, all" />
+    <meta charset="utf-8">
+    <meta name="author" content="KlokanTech">
+    <meta name="description" content="ol3cesium raster layer synchronization example">
+    <meta name="robots" content="index, all">
     <title>ol3cesium raster layer synchronization example</title>
     <link rel="stylesheet" href="../ol3/css/ol.css" type="text/css">
     <style>
       fieldset {display:inline-block;float:left;}
       label {display:block;}
       body.hideLayerInputs fieldset {display:none;}
+      #map2d, #map3d{position: absolute; left: 0; top: 0; bottom: 0; right: 0;}
+      #map2d{right: 50%;} #map3d{left: 50%;}
+      #infoDiv, #controls, #logo, #fork, #title{position: absolute; padding: 10px; z-index: 50;}
+      #infoDiv{right: 10px; bottom: 10px;}
+      #controls{right: 10px; top: 160px; text-align: right;}
+      #logo {left: 10px; bottom: 10px; padding: 10px 10px 5px 10px;}
+      #fork {top: 0; right: 0; border: 0; padding: 0;}
+      #title{top: 10px;left: 10px; padding: 0;}
+      #title img{width: 300px;}
+      .ol-zoom{top: 100px;}
+      fieldset{border: 0; background-color: #fff;}
     </style>
   </head>
   <body>
-    <div id="map2d" style="width:600px;height:400px;float:left;"></div>
-    <div id="map3d" style="width:600px;height:400px;float:left;position:relative;"></div>
-    <input type="button" value="Remove all layers" onclick="ol2d.getLayers().clear();document.body.className='hideLayerInputs';" />
-    <input type="button" value="Add Bing Maps" onclick="addBingMaps();" />
-    <input type="button" value="Add OSM" onclick="addOSM();" />
-    <input type="button" value="Add Stamen" onclick="addStamen();" />
-    <input type="button" value="Add TileWMS" onclick="addTileWMS();" />
-    <input type="button" value="Add TileJSON" onclick="addTileJSON();" />
-    <br /><br />
-    <input type="button" value="TileWMS change" onclick="changeTileWMSParams();" />
+    <div id="map2d"></div>
+    <div id="map3d"></div>
+    <div id="controls">
 
-    <fieldset id="layer0">
-      <label class="checkbox" for="visible0">
-        <input id="visible0" class="visible" type="checkbox" onchange="layer0.setVisible(this.checked)" checked/>OpenAerial layer
-      </label>
-      <label>opacity</label>
-      <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer0.setOpacity(this.value)"/>
-      <label>saturation</label>
-      <input class="saturation" type="range" min="0" max="5" step="0.01" oninput="layer0.setSaturation(this.value)"/>
-      <label>contrast</label>
-      <input class="contrast" type="range" min="0" max="2" step="0.01" oninput="layer0.setContrast(this.value)"/>
-      <label>brightness</label>
-      <input class="brightness" type="range" min="-1" max="1" step="0.01" oninput="layer0.setBrightness(this.value)"/>
-    </fieldset>
-    <fieldset id="layer1">
-      <label class="checkbox" for="visible10">
-        <input id="visible1" class="visible" type="checkbox" onchange="layer1.setVisible(this.checked)" checked/>Grand Canyon overlay
-      </label>
-      <label>opacity</label>
-      <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer1.setOpacity(this.value)"/>
-      <label>saturation</label>
-      <input class="saturation" type="range" min="0" max="5" step="0.01" oninput="layer1.setSaturation(this.value)"/>
-      <label>contrast</label>
-      <input class="contrast" type="range" min="0" max="2" step="0.01" oninput="layer1.setContrast(this.value)"/>
-      <label>brightness</label>
-      <input class="brightness" type="range" min="-1" max="1" step="0.01" oninput="layer1.setBrightness(this.value)"/>
-    </fieldset>
-    <fieldset id="layer2">
-      <label class="checkbox" for="visible10">
-        <input id="visible1" class="visible" type="checkbox" onchange="layer2.setVisible(this.checked)" checked/>World borders
-      </label>
-      <label>opacity</label>
-      <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer2.setOpacity(this.value)"/>
-      <label>saturation</label>
-      <input class="saturation" type="range" min="0" max="5" step="0.01" oninput="layer2.setSaturation(this.value)"/>
-      <label>contrast</label>
-      <input class="contrast" type="range" min="0" max="2" step="0.01" oninput="layer2.setContrast(this.value)"/>
-      <label>brightness</label>
-      <input class="brightness" type="range" min="-1" max="1" step="0.01" oninput="layer2.setBrightness(this.value)"/>
-    </fieldset>
+      <input type="button" value="Remove all layers" onclick="ol2d.getLayers().clear();
+          document.body.className = 'hideLayerInputs';" /><br>
+      <input type="button" value="Add Bing Maps" onclick="addBingMaps();" /><br>
+      <input type="button" value="Add OSM" onclick="addOSM();" /><br>
+      <input type="button" value="Add Stamen" onclick="addStamen();" /><br>
+      <input type="button" value="Add TileWMS" onclick="addTileWMS();" /><br>
+      <input type="button" value="Add TileJSON" onclick="addTileJSON();" /><br>
+      <input type="button" value="TileWMS change" onclick="changeTileWMSParams();" />
+    </div>
+    <div id="infoDiv">
+      <fieldset id="layer0">
+        <label class="checkbox" for="visible0">
+          <input id="visible0" class="visible" type="checkbox" onchange="layer0.setVisible(this.checked)" checked/>OpenAerial layer
+        </label>
+        <label>opacity</label>
+        <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer0.setOpacity(this.value)"/>
+        <label>saturation</label>
+        <input class="saturation" type="range" min="0" max="5" step="0.01" oninput="layer0.setSaturation(this.value)"/>
+        <label>contrast</label>
+        <input class="contrast" type="range" min="0" max="2" step="0.01" oninput="layer0.setContrast(this.value)"/>
+        <label>brightness</label>
+        <input class="brightness" type="range" min="-1" max="1" step="0.01" oninput="layer0.setBrightness(this.value)"/>
+      </fieldset>
+      <fieldset id="layer1">
+        <label class="checkbox" for="visible10">
+          <input id="visible1" class="visible" type="checkbox" onchange="layer1.setVisible(this.checked)" checked/>Grand Canyon overlay
+        </label>
+        <label>opacity</label>
+        <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer1.setOpacity(this.value)"/>
+        <label>saturation</label>
+        <input class="saturation" type="range" min="0" max="5" step="0.01" oninput="layer1.setSaturation(this.value)"/>
+        <label>contrast</label>
+        <input class="contrast" type="range" min="0" max="2" step="0.01" oninput="layer1.setContrast(this.value)"/>
+        <label>brightness</label>
+        <input class="brightness" type="range" min="-1" max="1" step="0.01" oninput="layer1.setBrightness(this.value)"/>
+      </fieldset>
+      <fieldset id="layer2">
+        <label class="checkbox" for="visible10">
+          <input id="visible1" class="visible" type="checkbox" onchange="layer2.setVisible(this.checked)" checked/>World borders
+        </label>
+        <label>opacity</label>
+        <input class="opacity" type="range" min="0" max="1" step="0.01" value="1" oninput="layer2.setOpacity(this.value)"/>
+        <label>saturation</label>
+        <input class="saturation" type="range" min="0" max="5" step="0.01" oninput="layer2.setSaturation(this.value)"/>
+        <label>contrast</label>
+        <input class="contrast" type="range" min="0" max="2" step="0.01" oninput="layer2.setContrast(this.value)"/>
+        <label>brightness</label>
+        <input class="brightness" type="range" min="-1" max="1" step="0.01" oninput="layer2.setBrightness(this.value)"/>
+      </fieldset>
+    </div>
+    <div id="title">
+      <img src="../images/ol3-cesium.png" alt="ol3cesium">
+    </div>
+    <div id="logo">
+      <a href="http://www.klokantech.com">
+        <img src="http://maptiler.com/images/klokantech1.png" style="width: 150px" alt="KlokanTech logo">
+      </a>
+    </div>
+    <div id="fork">
+      <a href="https://github.com/openlayers/ol3-cesium"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+    </div>
     <script src="../ol3/ol-debug.js"></script>
     <script src="../Cesium/Cesium.js"></script>
     <script src="../ol3cesium.js"></script>

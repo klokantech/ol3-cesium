@@ -1,25 +1,50 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="robots" content="index, all" />
+    <meta charset="utf-8">
+    <meta name="author" content="KlokanTech">
+    <meta name="description" content="ol3cesium exported methods example">
+    <meta name="robots" content="index, all">
     <title>ol3cesium exported methods example</title>
     <link rel="stylesheet" href="../ol3/css/ol.css" type="text/css">
+    <style>
+      #map{position: absolute; left: 0; top: 0; bottom: 0; right: 0;}
+      #infoDiv, #controls, #logo, #fork, #title{position: absolute; padding: 10px; z-index: 50; color: #fff;}
+      #infoDiv{right: 10px; bottom: 10px; padding: 10px; width: 350px; height: 108px;}
+      #controls{right: 10px; top: 160px; padding: 10px; text-align: right;}
+      input:first-child{color: red;}
+      #logo {left: 10px; bottom: 10px; padding: 10px 10px 5px 10px;}
+      #fork {top: 0; right: 0; border: 0; padding: 0;}
+      #title{top: 10px;left: 10px; padding: 0;}
+      #title img{width: 300px;}
+      .ol-zoom{top: 100px;}
+    </style>
   </head>
   <body>
-    <div id="map" style="width:600px;height:400px;float:left;"></div>
+    <div id="map"></div>
     <div id="infoDiv"></div>
-    <input type="button" value="Enable/disable" onclick="javascript:ol3d.setEnabled(!ol3d.getEnabled())" />
-    <br />
-    <input type="button" value="setHeading(Math.PI / 6)" onclick="javascript:camera.setHeading(Math.PI / 6)" />
-    <input type="button" value="setTilt(Math.PI / 8)" onclick="javascript:camera.setTilt(Math.PI / 8)" />
-    <input type="button" value="setDistance(10 000 000)" onclick="javascript:camera.setDistance(10000000)" />
-    <input type="button" value="setAltitude(10 000 000)" onclick="javascript:camera.setAltitude(10000000)" />
-    <br />
-    <input type="button" value="lookAt([35, 40])" onclick="javascript:camera.lookAt(ol.proj.transform([35, 40], 'EPSG:4326', 'EPSG:3857'))" />
-    <input type="button" value="setCenter([40, 45])" onclick="javascript:camera.setCenter(ol.proj.transform([40, 45], 'EPSG:4326', 'EPSG:3857'))" />
-    <input type="button" value="setPosition([45, 50])" onclick="javascript:camera.setPosition(ol.proj.transform([45, 50], 'EPSG:4326', 'EPSG:3857'))" />
+    <div id="controls">
+      <input type="button" value="Enable/disable" onclick="javascript:ol3d.setEnabled(!ol3d.getEnabled())" /><br><br>
+
+      <input type="button" value="setHeading(Math.PI / 6)" onclick="javascript:camera.setHeading(Math.PI / 6)" /><br>
+      <input type="button" value="setTilt(Math.PI / 8)" onclick="javascript:camera.setTilt(Math.PI / 8)" /><br>
+      <input type="button" value="setDistance(10 000 000)" onclick="javascript:camera.setDistance(10000000)" /><br>
+      <input type="button" value="setAltitude(10 000 000)" onclick="javascript:camera.setAltitude(10000000)" /><br>
+      <input type="button" value="lookAt([35, 40])" onclick="javascript:camera.lookAt(ol.proj.transform([35, 40], 'EPSG:4326', 'EPSG:3857'))" /><br>
+      <input type="button" value="setCenter([40, 45])" onclick="javascript:camera.setCenter(ol.proj.transform([40, 45], 'EPSG:4326', 'EPSG:3857'))" /><br>
+      <input type="button" value="setPosition([45, 50])" onclick="javascript:camera.setPosition(ol.proj.transform([45, 50], 'EPSG:4326', 'EPSG:3857'))" /><br>
+    </div>
+    <div id="title">
+      <img src="../images/ol3-cesium.png" alt="ol3cesium">
+    </div>
+    <div id="logo">
+      <a href="http://www.klokantech.com">
+        <img src="http://maptiler.com/images/klokantech1.png" style="width: 150px" alt="KlokanTech logo">
+      </a>
+    </div>
+    <div id="fork">
+      <a href="https://github.com/openlayers/ol3-cesium"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+    </div>
     <script src="../ol3/ol-debug.js"></script>
     <script src="../Cesium/Cesium.js"></script>
     <script src="../ol3cesium.js"></script>
